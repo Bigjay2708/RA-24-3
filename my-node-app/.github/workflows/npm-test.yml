@@ -10,12 +10,23 @@ jobs:
         node_version: [18.x]
     steps:
       - uses: actions/checkout@v4
-
+      
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node_version }}
 
-      - run: npm install
-      - run: npm run build --if-present
-      - run: npm test
+      - name: Install dependencies
+        run: |
+          cd my-node-app
+          npm install
+
+      - name: Build project (if applicable)
+        run: |
+          cd my-node-app
+          npm run build --if-present
+
+      - name: Run tests
+        run: |
+          cd my-node-app
+          npm test
