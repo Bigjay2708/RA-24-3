@@ -15,18 +15,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node_version }}
+          cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          cd my-node-app
-          npm install
+        working-directory: my-node-app
+        run: npm install
 
       - name: Build project (if applicable)
-        run: |
-          cd my-node-app
-          npm run build --if-present
+        working-directory: my-node-app
+        run: npm run build --if-present
 
       - name: Run tests
-        run: |
-          cd my-node-app
-          npm test
+        working-directory: my-node-app
+        run: npm test
